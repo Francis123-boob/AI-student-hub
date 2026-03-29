@@ -1,0 +1,5 @@
+{
+  "name": "AI Student Survival Hub",
+  "description": "A full-stack academic management system for students and lecturers with AI-powered task planning, mock exams, and QR attendance.",
+  "requestFramePermissions": ["camera"]
+}

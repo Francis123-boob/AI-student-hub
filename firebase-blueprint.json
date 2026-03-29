@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "lecturer", "admin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "role"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Academic courses created by lecturers.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "lecturerId": { "type": "string" },
+        "lecturerName": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["lecturerId", "title"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Assignments created for courses.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseId": { "type": "string" },
+        "courseTitle": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "deadline": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["courseId", "title", "deadline"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "Student assignment submissions.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "assignmentId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "content": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["submitted", "pending"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["assignmentId", "studentId", "status"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Student attendance records.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "courseId": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["Present", "Absent"] }
+      },
+      "required": ["studentId", "courseId", "date", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "UserProfile", "description": "User profile documents." },
+    "/courses/{courseId}": { "schema": "Course", "description": "Course documents." },
+    "/assignments/{assignmentId}": { "schema": "Assignment", "description": "Assignment documents." },
+    "/submissions/{submissionId}": { "schema": "Submission", "description": "Submission documents." },
+    "/attendance/{attendanceId}": { "schema": "Attendance", "description": "Attendance documents." }
+  }
+}
